@@ -5,17 +5,16 @@
     "lib": ["ES2022"],
     "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@config/*": ["config/*"],
-      "@middleware/*": ["middleware/*"],
-      "@modules/*": ["modules/*"],
-      "@utils/*": ["utils/*"],
-      "@db/*": ["db/*"],
-      "@providers/*": ["providers/*"],
-      "@sockets/*": ["sockets/*"],
-      "@jobs/*": ["jobs/*"]
+      "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@db/*": ["./src/db/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@sockets/*": ["./src/sockets/*"],
+      "@jobs/*": ["./src/jobs/*"]
     },
     "strict": true,
     "esModuleInterop": true,
@@ -25,14 +24,14 @@
     "declaration": false,
     "sourceMap": true,
     "removeComments": true,
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "ignoreDeprecations": "5.0"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests", "**/*.test.ts"]

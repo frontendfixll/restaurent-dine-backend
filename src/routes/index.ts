@@ -1,0 +1,68 @@
+import { Router } from 'express';
+import authRoutes from '@modules/auth/auth.routes';
+import userRoutes from '@modules/users/user.routes';
+import roleRoutes from '@modules/roles/role.routes';
+import auditRoutes from '@modules/audit/audit.routes';
+import restaurantRoutes from '@modules/restaurant/restaurant.routes';
+import categoryRoutes from '@modules/menu/category.routes';
+import itemRoutes from '@modules/menu/item.routes';
+import modifierGroupRoutes from '@modules/menu/modifierGroup.routes';
+import comboRoutes from '@modules/menu/combo.routes';
+import menuMetaRoutes from '@modules/menu/menuMeta.routes';
+import tableRoutes from '@modules/tables/table.routes';
+import tableSessionRoutes from '@modules/tables/tableSession.routes';
+import qrCodeRoutes from '@modules/qr/qrCode.routes';
+import orderRoutes from '@modules/orders/order.routes';
+import guestOrderRoutes from '@modules/orders/guestOrder.routes';
+import kdsRoutes from '@modules/kds/kds.routes';
+import invoiceRoutes from '@modules/invoices/invoice.routes';
+import paymentRoutes from '@modules/payments/payment.routes';
+import cashSessionRoutes from '@modules/cashSessions/cashSession.routes';
+import billingRoutes from '@modules/billing/billing.routes';
+import inventoryRoutes from '@modules/inventory/inventory.routes';
+import recipeRoutes from '@modules/inventory/recipe.routes';
+import customerRoutes from '@modules/customers/customer.routes';
+import feedbackRoutes from '@modules/feedback/feedback.routes';
+import discountRoutes from '@modules/promotions/discount.routes';
+import couponRoutes from '@modules/promotions/coupon.routes';
+import loyaltyRoutes from '@modules/promotions/loyalty.routes';
+import notificationRoutes from '@modules/notifications/notification.routes';
+import reportsRoutes from '@modules/reports/reports.routes';
+
+const router = Router();
+
+router.get('/ping', (_req, res) => {
+  res.json({ success: true, data: { pong: true, at: new Date().toISOString() } });
+});
+
+router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
+router.use('/roles', roleRoutes);
+router.use('/audit-logs', auditRoutes);
+router.use('/restaurant', restaurantRoutes);
+router.use('/categories', categoryRoutes);
+router.use('/items', itemRoutes);
+router.use('/modifier-groups', modifierGroupRoutes);
+router.use('/combos', comboRoutes);
+router.use('/menu', menuMetaRoutes);
+router.use('/tables', tableRoutes);
+router.use('/table-sessions', tableSessionRoutes);
+router.use('/qr-codes', qrCodeRoutes);
+router.use('/orders', orderRoutes);
+router.use('/guest/orders', guestOrderRoutes);
+router.use('/kds', kdsRoutes);
+router.use('/invoices', invoiceRoutes);
+router.use('/payments', paymentRoutes);
+router.use('/cash-sessions', cashSessionRoutes);
+router.use('/billing', billingRoutes);
+router.use('/inventory', inventoryRoutes);
+router.use('/recipes', recipeRoutes);
+router.use('/customers', customerRoutes);
+router.use('/feedback', feedbackRoutes);
+router.use('/discounts', discountRoutes);
+router.use('/coupons', couponRoutes);
+router.use('/loyalty', loyaltyRoutes);
+router.use('/notifications', notificationRoutes);
+router.use('/reports', reportsRoutes);
+
+export default router;

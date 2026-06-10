@@ -1,6 +1,12 @@
 import { Schema, model, Document, Types } from 'mongoose';
 
 export type TableStatus = 'vacant' | 'seated' | 'ordered' | 'awaiting_bill' | 'cleaning';
+export type TableShape = 'round' | 'square' | 'rect';
+
+export interface TablePosition {
+  x: number;
+  y: number;
+}
 
 export interface TableDocument extends Document {
   _id: Types.ObjectId;
@@ -8,6 +14,8 @@ export interface TableDocument extends Document {
   zone?: string;
   capacity: number;
   status: TableStatus;
+  shape: TableShape;
+  position?: TablePosition;
   currentSessionId?: Types.ObjectId;
   mergedWithTableIds: Types.ObjectId[];
   mergedIntoTableId?: Types.ObjectId;
@@ -27,6 +35,16 @@ const TableSchema = new Schema<TableDocument>(
       enum: ['vacant', 'seated', 'ordered', 'awaiting_bill', 'cleaning'],
       default: 'vacant',
       index: true,
+    },
+    shape: {
+      type: String,
+      enum: ['round', 'square', 'rect'],
+      default: 'square',
+    },
+    position: {
+      type: { x: { type: Number }, y: { type: Number } },
+      default: undefined,
+      _id: false,
     },
     currentSessionId: { type: Schema.Types.ObjectId, ref: 'TableSession' },
     mergedWithTableIds: [{ type: Schema.Types.ObjectId, ref: 'Table' }],

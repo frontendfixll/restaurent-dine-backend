@@ -47,6 +47,8 @@ export interface CreateTableInput {
   number: string;
   zone?: string;
   capacity?: number;
+  shape?: 'round' | 'square' | 'rect';
+  position?: { x: number; y: number };
   sortOrder?: number;
 }
 
@@ -57,6 +59,8 @@ export async function createTable(input: CreateTableInput, ctx: ActorCtx) {
     number: input.number,
     zone: input.zone,
     capacity: input.capacity ?? 4,
+    shape: input.shape,
+    position: input.position,
     sortOrder: input.sortOrder ?? 0,
   });
   await writeAuditLog({
@@ -102,6 +106,8 @@ export interface UpdateTableInput {
   number?: string;
   zone?: string;
   capacity?: number;
+  shape?: 'round' | 'square' | 'rect';
+  position?: { x: number; y: number } | null;
   sortOrder?: number;
   isActive?: boolean;
 }
@@ -117,6 +123,11 @@ export async function updateTable(id: string, input: UpdateTableInput, ctx: Acto
   }
   if (input.zone !== undefined) t.zone = input.zone;
   if (input.capacity !== undefined) t.capacity = input.capacity;
+  if (input.shape !== undefined) t.shape = input.shape;
+  if (input.position !== undefined) {
+    if (input.position === null) t.set('position', undefined);
+    else t.position = input.position;
+  }
   if (input.sortOrder !== undefined) t.sortOrder = input.sortOrder;
   if (typeof input.isActive === 'boolean') t.isActive = input.isActive;
   await t.save();
